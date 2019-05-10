@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="juniper">
+        <div class="navigation">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            {% if request.session.user_id %}
+            <a class="cart" href="/cart"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+            {% endif %}
+        </div>
+        <h1 class="juniper-header">Juniper Lake Campground</h1>
+    </div>
+</body>
+</html>

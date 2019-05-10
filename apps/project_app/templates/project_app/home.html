@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="top-container">
+        <div class="navigation">
+            <a class="nav-link title" href="/">Just Camping</a>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            {% if request.session.user_id %}
+            <a class="cart" href="/cart/1"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+            {% endif %}
+        </div>
+        <div class="name">
+            <img class="campfire" src="{% static 'project_app/images/campfire.png' %}" alt="">
+        </div>
+    </div>
+    <div class="container2">
+        <h1 class="heading">Get Outside!</h1>
+        <p class="info1">From National Parks to State Parks to State Beaches, there is something for everyone!</p>
+        <p class="info">Just Camping makes it easy to book your favorite campsite for your next camping trip.</p>
+        <p class="info">California has so many places to explore. Where will you go next?</p>
+        <p class="info2"><a class="info2-a" href="/about">Find out more about us</a></p>
+    </div>
+
+    <div class="container3">
+    </div>
+    <div class="container4">
+        <h1 class="heading2">Explore Destinations</h1>
+        <div class="row no-gutters justify-content-around">
+            <div class="col-3 cal">
+                <h4 class="cali">Northern California</h4>
+                <img class="pics-r" src="{% static 'project_app/images/redwoods-main.jpg' %}" alt="redwoods">
+                <p class="more-dest">Visit the Enormous Redwoods</p>
+            </div>
+            <div class="col-3 cal">
+                <h4 class="cali">Southern California</h4>
+                <img class="pics" src="{% static 'project_app/images/jtree.jpg' %}" alt="redwoods">
+                <p class="more-dest">Hike in Joshua Tree</p>
+            </div>
+            <div class="col-3 cal">
+                <h4 class="cali">California Coast</h4>
+                <img class="pics-b" src="{% static 'project_app/images/beach.jpg' %}" alt="redwoods">
+                <p class="more-dest">Wake up on the Beach</p>
+            </div>
+        </div>
+        <p class="see-all"><a class="see" href="/destinations">See all Destinations</a></p>
+    </div>
+    <div class="container5"></div>
+    <footer>
+        <div class="connect">
+            <p>Connect</p><hr>
+            <a href="https://www.facebook.com/" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/" class="fa fa-twitter"></a>
+            <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+        </div>
+        <div class="foot-items">
+            <p class="terms"> <a class="terms" href="">Terms of Use</a></p>
+            <p class="terms"><a class="terms" href="">Contact Us</a></p>
+            <p class="copyright">© 2019 Just Camping. All rights reserved.</p>
+            <p class="photos">Photos by Eric Muhr, Nathan Anderson, Tony Chen, Ian Schneider, Gerson Repreza, Chris Lawton on Unsplash </p>
+            <div class="icon">Icon made by <a class="icon" href="https://www.flaticon.com/authors/those-icons" >Those Icons</a> from <a class="icon" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a class="icon" href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        </div>
+    </footer>
+</body>
+</html>

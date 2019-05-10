@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-lassen">
+        <div class="navigation-dest">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            {% if request.session.user_id %}
+            <a class="cart" href="/cart"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+            {% endif %}
+        </div>
+        <h1 class="lassen-camp-title">Lassen Volcanic National Park</h1>
+    </div>
+    <div class="campground">
+        <h3 class="t-l-title">Choose a campground:</h3>
+        <table class="table table-striped t-lassen">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Campground</th>
+                    <th scope="col">Season Dates</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Water</th>
+                    <th scope="col">Number of Sites</th>
+                    <th scope="col">Fee</th>
+                    <th scope="col">Elevation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <a class="link-lassen" href="/butte">Butte Lake</a></td>
+                    <td>6/7 - 10/22</td>
+                    <td>Closed</td>
+                    <td>Potable, None after 9/10</td>
+                    <td>101</td>
+                    <td>$22</td>
+                    <td>6100'</td>
+                </tr>
+                <tr>
+                    <td> <a class="link-lassen" href="/juniper">Juniper Lake</a></td>
+                    <td>6/28 - 10/8</td>
+                    <td>Closed</td>
+                    <td>No water</td>
+                    <td>18</td>
+                    <td>$12</td>
+                    <td>6800'</td>
+                </tr>
+                <tr>
+                    <td> <a class="link-lassen" href="/manzanita">Manzanita Lake</a></td>
+                    <td>5/24 - snow closure</td>
+                    <td>Closed</td>
+                    <td>Potable, *None after 10/15</td>
+                    <td>179</td>
+                    <td>$26 / *$15</td>
+                    <td>5900'</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+</head>
+<body>
+    <div class="butte">
+        <div class="navigation-dest">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            {% if request.session.user_id %}
+            <a class="cart" href="/cart/1"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+            {% endif %}
+        </div>
+        <h1 class="butte-header">Butte Lake Campground</h1>
+    </div>
+    <div class="butte-container">
+        <div class="butte-info">
+            <h4 class="butte-title">Overview</h4>
+            <p class="butte-li">This campground is situtated in Lassen Volcanic National Park in Northern California. It is popular for fishing, canoeing, kayaking, and swimming. There are many recreation opportunities for outdoor enthusiasts. There are also trails for hikers and backpackers.</p><hr>
+            <h4 class="butte-title">Need To Know:</h4>
+            <ul>
+                <li class="butte-li"> >No electricity/water/sewer site hook-ups.</li>
+                <li class="butte-li"> >Campers must have valid permit upon entering campground.</li>
+                <li class="butte-li"> >There is a required entrance fee of $25 per vehicle.</li>
+                <li class="butte-li"> >No motorized boats.</li>
+            </ul><hr>
+            <h4 class="butte-title">Amenities</h4>
+            <ul>
+                <li class="butte-li"> >Accessible Flush Toilets</li>
+                <li class="butte-li"> >Visitor Center</li>
+                <li class="butte-li"> >Parking Area</li>
+                <li class="butte-li"> >Picnic Table</li>
+                <li class="butte-li"> >Food Locker</li>
+                <li class="butte-li"> >Fire Pit</li>
+            </ul>
+            {% if request.session.user_id %}
+            <button type="button" class="btn btn-secondary btn-book"> <a class="a-book" href="/booking/1">Book This Campsite</a> </button>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <button type="button" class="btn btn-secondary btn-book" data-toggle="modal" data-target="#logreg">Book This Campsite</button>
+            <div class="modal fade" id="logreg" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login">
+                                <form action="/booklogin" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-4 col-form-label col-form-label-sm">Email address:</label>
+                                        <input type="email" class="form-contol" name="l_email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-4 col-form-label col-form-label-sm">Password:</label>
+                                        <input type="password" class=" form-contol" name="password">
+                                    </div>
+                                    <input type="hidden" name="campsite_id" value="{{this_campsite.id}}">
+                                    <button type="submit" class="btn btn-secondary btn-init btn-modal-log">Login</button>
+                                </form>
+                            </div><hr>
+                            <p class="mod-reg"><a class=modal-reg href="/loginreg">Click Here</a> to register</p> 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+        </div>
+        <div class="season-fee">
+            <h3 class="t-b-title">Seasons & Fees:</h3>
+            <table class="table b-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Season Dates</th>
+                        <th scope="col">Site Type</th>
+                        <th scope="col">Nightly Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>6/7 - 9/9 (Peak)</td>
+                        <td>Standard Nonelectric</td>
+                        <td>$22</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Tent Only Nonelectric</td>
+                        <td>$22</td>
+                    </tr>
+                    <tr>
+                        <td>9/10 - 10/22 (Walk-Up)</td>
+                        <td>Standard Nonelectric</td>
+                        <td>$15</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Tent Only Nonelectric</td>
+                        <td>$15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

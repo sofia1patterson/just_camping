@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="dest-container">
+        <div class="navigation-dest">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            {% if request.session.user_id %}
+            <a class="cart" href="/cart/1"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+            {% if 'user_id' not in request.session %}
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+            {% endif %}
+        </div>
+        <h1 class=dest-head>California</h1>
+    </div>
+    <div class="main-dest-contain">
+        <!-- <h3 class="dest-title">Northern California</h3> -->
+        <div class="grid">
+            <div class="nor1">
+                <h3 class="lassen-title">Lassen Volcanic National Park</h3>
+                <img class="lassen" src="{% static 'project_app/images/lassen.jpg' %}" alt="lassen">
+                <p class="dest-lassen"> Explore this volcano filled with vibrant wildlife and amazing plant speices. Learn about the history of the park, and take hikes with scenic views.</p>
+                <p class="dest-burney"><a class="dest-lassen" href="/lassen">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="nor2">
+                <h3 class="redwoods-title">Redwoods National and State Parks</h3>
+                <img class="redwoods" src="{% static 'project_app/images/redwoods.jpg' %}" alt="redwoods">
+                <p class="dest-redwoods">Visit the tallest trees on Earth that take your breath away. Get lost in this park with so much to see.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="nor3">
+                <h3 class="tahoe-title">Lake Tahoe Campgrounds</h3>
+                <img class="tahoe" src="{% static 'project_app/images/tahoe.jpg' %}" alt="tahoe">
+                <p class="dest-redwoods">With bright blue water, sandy beaches, and alpine landscaping, Lake Tahoe is one of the most scenic campgrounds in all of California. It is a camping lover's dream!</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="nor4">
+                <h3 class="burney-title">McArthur-Burney Falls Memorial State Park</h3>
+                <img class="burney" src="{% static 'project_app/images/mcarthur_burney.jpg' %}" alt="mcarthur burney">
+                <p class="dest-burney">Enjoy one of the most beautiful waterfalls in California! It is accompanied by amazing wildlife and plant life.</p>
+                <p class="dest-burney"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="nor5">
+                <h3 class="tahoe-title">Lava Beds National Monument</h3>
+                <img class="tahoe" src="{% static 'project_app/images/lave_beds.jpg' %}" alt="lava beds">
+                <p class="dest-redwoods">Explore the lava tubes and caves that spread beneath the earth's surface forged by violent eruptions of this planet's past.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="nor6">
+                <h3 class="redwoods-title">Mount Shasta Campgrounds</h3>
+                <img class="tahoe" src="{% static 'project_app/images/shasta.jpg' %}" alt="shasta">
+                <p class="dest-redwoods">This is the fifth highest peak in California, and it is exceptional for skiing, mountain climbing, and hiking.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+        </div>
+        <!-- <h3 class="dest-title">Southern California</h3> -->
+        <div class="grid">
+            <div class="so1">
+                <h3 class="redwoods-title">Joshua Tree National Park</h3>
+                <img class="josh" src="{% static 'project_app/images/joshtree.jpg' %}" alt="joshua tree">
+                <p class="dest-redwoods">A staple among desert parks that is divided into two arid ecosystems. Visit the girant branching yuccas known as Joshua trees.</p>
+                <p class="dest-josh"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="so2">
+                <h3 class="redwoods-title">Mojave National Preserve</h3>
+                <img class="mojave" src="{% static 'project_app/images/mojave.jpg' %}" alt="mojave">
+                <p class="dest-redwoods">Spend the weekend exploring this huge preserve. From hiking to camping to off-roading, this is not one you want to miss.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="so3">
+                <h3 class="redwoods-title">Cuyamaca Rancho State Park</h3>
+                <img class="mojave" src="{% static 'project_app/images/cuyamaca.jpg' %}" alt="cuyamaca">
+                <p class="dest-redwoods">This state park boasts camping and hiking in an oak woodland forest, with a sprinkling of pines and lovely meadows with creeks.</p>
+                <p class="dest-cuya"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="so4">
+                <h3 class="redwoods-title">San Bernardino National Forest</h3>
+                <img class="death" src="{% static 'project_app/images/san_bernardino.jpg' %}" alt="San Bernardino">
+                <p class="dest-redwoods">There are so many recreational opportunities here from hiking to horse-back riding to off-roading. What are you waiting for?</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="so5">
+                <h3 class="redwoods-title">Death Valley National Park</h3>
+                <img class="death" src="{% static 'project_app/images/death.jpg' %}" alt="death valley">
+                <p class="dest-redwoods">Don't be fooled by the name! This amazing National Park is home to mountain-sized sand dunes, below-sea-level-flats, and colorful sandstone canyons.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="so6">
+                <h3 class="tahoe-title">Yosemite National Park</h3>
+                <img class="death" src="{% static 'project_app/images/yosemite.jpg' %}" alt="yosemite">
+                <p class="dest-redwoods">The tranquility of the High Sierra is enough to get you to go to yosemite. This is one of the most iconic national parks in the entire country.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+        </div>
+        <!-- <h3 class="dest-title">California Coast</h3> -->
+        <div class="grid">
+            <div class="coast1">
+                <h3 class="redwoods-title">Channel Islands National Park</h3>
+                <img class="burney" src="{% static 'project_app/images/channel_islands.jpg' %}" alt="channel islands">
+                <p class="dest-redwoods">This park consists of five of the eight channels. They are relatively undeveloped, perfect for anyone wanting to get away from the city.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="coast2">
+                <h3 class="redwoods-title">Angel Island State Park</h3>
+                <img class="death" src="{% static 'project_app/images/angel.jpg' %}" alt="angel island">
+                <p class="dest-redwoods">Take a walk through time on Angel Island! Experience the history and beauty this island has to offer.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="coast3">
+                <h3 class="redwoods-title">Sonoma Coast State Park</h3>
+                <img class="death" src="{% static 'project_app/images/sonoma.jpg' %}" alt="sonoma">
+                <p class="dest-redwoods">Feel the humility and wonder as you drive down the PCH gazing out at the ocean from this park.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="coast4">
+                <h3 class="redwoods-title">Mendocino Headlands State Park</h3>
+                <img class="burney" src="{% static 'project_app/images/mendocino.jpg' %}" alt="mendocino">
+                <p class="dest-redwoods">Go through acres of undeveloped seaside bluffs and enjoy the beaches at this park.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="coast5">
+                <h3 class="redwoods-title">Julia Pfeiffer Burns State Park</h3>
+                <img class="death" src="{% static 'project_app/images/julia.jpg' %}" alt="Julia Pfeiffer Burns">
+                <p class="dest-redwoods">Home to the iconic Big Sur, with a priceless perch over the Pacific Ocean and only two hike-in campsites to enjoy a private paradise.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+            <div class="coast6">
+                <h3 class="redwoods-title">Border Field State Park</h3>
+                <img class="death" src="{% static 'project_app/images/border.jpg' %}" alt="border">
+                <p class="dest-redwoods">With views into Mexico and the Pacific, this park gives visitors a different perspective into nature with two countries habitats mixed into one.</p>
+                <p class="dest-lassen"><a class="dest-lassen" href="">Book</a> a site at one of the campgrounds.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

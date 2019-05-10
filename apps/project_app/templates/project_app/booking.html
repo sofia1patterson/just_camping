@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'project_app/js/script.js' %}"></script>
+</head>
+<body>
+    <div class="booking-bod">
+        <div class="navigation">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            <a class="cart" href="/cart/1"> <img class="cart-icon" src="{% static 'project_app/images/cart_white.png' %}" alt="cart"> </a>
+            <p class="count">{{request.session.count}}</p>
+            <div class="dropdown">
+                <button class="nav-link btn dropdown-toggle user user-drop" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, {{current_user.first_name}}</button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link dropdown-item" href="/user">Dashboard</a>
+                    <a class="nav-link dropdown-item" href="">Favorites</a>
+                    <a class="nav-link dropdown-item" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+        <h1 class="book-title">Book a Site at {{this_campsite.name}}</h1>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="book-main">
+            <div class="book-form">
+                <form action="/book/{{this_campsite.id}}" method="POST">
+                    {% csrf_token %}
+                    <h1 class="form-label space">Travel Dates</h1>
+                    <div class="form-row space">
+                        <div class="col-md-4 space">
+                            <label class="space" for="from">From</label>
+                            <input class="form-control space" type="text" id="from" name="from">
+                        </div>
+                        <div class="col-md-4 space">
+                            <label class="space" for="to">To</label>
+                            <input class="form-control space" type="text" id="to" name="to"><br>
+                        </div>
+                        <div class="col-md-2 space">
+                            <label class="space">Nights</label>
+                            <input class="form-control space" type="number" class="space" min="0" step="1" id="nights" name="nights"><br>
+                        </div>
+                    </div>
+                    <h1 class="form-label">Site</h1>
+                    <div class="form-row space">
+                        <div class="col-md-2 space">
+                            <label>Number</label>
+                            <input type="number" name="number" min="0" step="1" class="form-control space">
+                        </div>
+                        <div class="col-md-2 space">
+                            <label>Loop</label>
+                            <input type="text" class="form-control space" name="loop">
+                        </div>
+                    </div>
+                    <h1 class="form-label">Primary Occupant</h1>
+                    <div class="form-row space">
+                        <div class="col-md-6 space">
+                            <label >First Name</label>
+                            <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{current_user.first_name}}">
+                        </div>
+                        <div class="col-md-6 space">
+                            <label >Last Name</label>
+                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{current_user.last_name}}">
+                        </div>
+                    </div>
+                    <div class="form-row space">
+                        <div class="col-md-6 space">
+                            <label >Email address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter email" value="{{current_user.email}}">
+                        </div>
+                        <div class="col-md-6 space">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone_number" class="form-control"  placeholder="+12345678901">
+                        </div>
+                    </div>
+                    <h1 class="form-label space">Occupants and Vehicles</h1>
+                    <div class="form-row space">
+                        <div class="col-md-2 space">
+                            <label>Occupants</label>
+                            <select name="occupants" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 space">
+                            <label>Vehicles</label>
+                            <select name="vehicles" class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h1 class="form-label">Site Type</h1>
+                    <div class="col-md-2 space">
+                        <select name="site" class="form-control space">
+                            <option>Tent</option>
+                            <option>Trailer</option>
+                            <option>RV</option>
+                        </select>
+                    </div><br>
+                    <input type="hidden" name="price" value="{{this_campsite.id}}">
+                    <button type="submit" class="btn btn-secondary">Review and Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

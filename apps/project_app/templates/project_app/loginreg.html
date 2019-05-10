@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Just Camping</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'project_app/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'project_app/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="logreg-bod">
+        <div class="navigation">
+            <a href="/"><img class="logo-pic" src="{% static 'project_app/images/logo.png' %}" alt="logo"></a> 
+            <p class="space" > </p>
+            <a class="nav-link" href="/about">About</a>
+            <a class="nav-link" href="/destinations">Destinations</a>
+            <a class="nav-link" href="">Favorites</a>
+            <a class="nav-link" href="/loginreg">Login/Register</a>
+        </div>
+        <div class="label">
+            <h2>Register</h2>
+            <h2>Login</h2>
+        </div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="main-reg">
+            <div class="register">
+                <form action="/register" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-sm-4 col-form-label col-form-label-sm">First Name:</label>
+                        <input type="text" class="form-contol " name="first_name" >
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-form-label col-form-label-sm">Last Name:</label>
+                        <input type="text" class="form-contol" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-form-label col-form-label-sm">Email address:</label>
+                        <input type="email" class="form-contol" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-form-label col-form-label-sm">Password:</label>
+                        <input type="password" class=" form-contol" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-form-label col-form-label-sm">Password Confirmation:</label>
+                        <input type="password" class="form-contol" name="pw_confirm">
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-init">Register</button>
+                </form>
+            </div>
+            <div class="login">
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email" class="col-sm-4 col-form-label col-form-label-sm">Email address:</label>
+                        <input type="email" class="form-contol" name="l_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-4 col-form-label col-form-label-sm">Password:</label>
+                        <input type="password" class=" form-contol" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-init">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
